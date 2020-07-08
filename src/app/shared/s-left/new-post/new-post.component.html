@@ -1,0 +1,54 @@
+<main>
+  <!--Posting Section-->
+  <div class="card">
+    <div class="modal-header">
+      <img src="./assets/img/brand/dbuzz.svg" class="navbar-brand-img" alt="..." height="30px">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+        <span aria-hidden="true"><i class="fa fa-close"></i></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="section-blog-list profile-item">
+        <form role="form" name="steemForm" (ngSubmit)="createPost();" [formGroup]="steemForm" novalidate>
+          <div class="media align-items-top">
+            <span class="avatar rounded-circle">
+              <a (click)="gotoProfile()"> <img alt="Image placeholder" src="{{ profile_pic }}"
+                  onError="this.src='assets/avatars/AVATAR.svg'" width="50" height="50"></a>
+            </span>
+            <div class="media-body ml-2">
+              <textarea rows="4" formControlName="post" class="form-control text-sm" placeholder="Got something to buzz?"
+              (keyup)="updateCounter();autosize($event);addTags()" (keydown)="autosize($event)" (blur)="addTags();" autofocus></textarea>
+              <span></span>
+              <span *ngFor="let tag of tags; let t=index">
+                <small class="badge badge-primary" >{{ tag }} <i class="fa fa-window-close" (click)="removeTag(t)"></i></small>&nbsp;
+              </span>
+              <input type="text" formControlName="tags" class="form-control text-sm" *ngIf="!hide_tags" placeholder="Enter tags here (Use space to separate tags)"
+                (keyup)="updateCounter();validateTags();" (focus)="validateTags();" (blur)="pushTagsOnKeyUp()">
+            </div>
+          </div>
+          <div class="row justify-content-md-left ml-4">
+            <div class="col-6 justify-content-between">
+              <div class="add">
+                <!-- <button type="button" class="btn btn-link text-sm" (click)="addTags()">Add Tags</button> -->
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="float-right mt-2">
+                <span class=" mr-2" id="counter_lbl1">{{counter}}</span>
+                <span class=" mr-2">|</span>
+                <!-- <span><i class="fa fa-plus-circle mr-2" data-toggle="modal" data-target="#exampleModal"></i> </span> -->
+                <button *ngIf="!submitting" class="btn btn-primary" [disabled]="steemForm.invalid" 
+                  type="submit">Buzz
+                  it</button>
+                <button *ngIf="submitting" class="btn btn-primary" type="button" disabled><i
+                    class="fa fa-spinner fa-spin"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+
+  </div>
+  
+</main>

@@ -1,0 +1,218 @@
+.card-body {
+    margin: 5px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.mobile-bottom {
+    margin-bottom: 20rem !important;
+}
+
+.card-body:hover, .card-body:focus{
+    background-color: #f5f8fa;
+}
+
+.container-fluid {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.divider {
+    height: 4px;
+    color: #e6ecf0;
+    background-color: #e6ecf0;
+    border: none;
+}
+
+textarea.form-control {
+    overflow:hidden;
+    display:inline-block;
+    word-break: break-word;
+    white-space:pre-wrap;
+    padding-top: -28px;
+    padding-bottom: -39px;
+    resize: none;
+    font-size: 18px;
+    height:2.5em;
+    border-style: none;
+    font-weight: 500;
+    min-height: 2.5em;
+}
+
+input.form-control {
+    font-size: 16px;
+    // border-style: none;
+    
+}
+
+.response {
+    color: #E61C34;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.hidden {
+    display:none;
+}
+.btn-primary{
+    background-color: #E61C34;
+    border-radius: 25px !important;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.cslider {
+    display: flex;
+    align-items: center;
+    width: 222px; 
+    color: #7d868c;
+    background-color: #fff;
+    padding: 2px;
+    position: absolute;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-top: -2px;
+    
+    .fa-chevron-up {
+        cursor: pointer;
+        border: 1px solid #E61C34;
+        color: #E61C34;
+        border-radius: 10000px;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        line-height: 15px;
+        justify-content: center;
+    }
+    & > span:first-child {
+        margin-left: 5px;
+    }
+    & > span:nth-child(2) {
+        margin: 0 5px;
+    }
+    & > span:last-child {
+        display: inline-block;
+        padding-left: 10px;
+        .fa-times {
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .ng5-slider {
+        margin: 15px 0;
+        & >.ng5-slider-floor,
+        & >.ng5-slider-ceil,
+        & >.ng5-slider-model-value {
+            display: none;
+        }
+        .ng5-slider-pointer {
+            width: 20px;
+            height: 20px;
+            top: -10px;
+            background-color: #fff;
+            border: 1px solid #e4e4e4;
+        }
+        .ng5-slider-pointer.ng5-slider-active:after {
+            background-color: #fff;
+        }
+        .ng5-slider-bar {
+            background: #E61C34;
+        }
+    }
+}
+
+
+.url a {
+    color: #14171a !important;
+    cursor: pointer;
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }   
+}
+
+.inline-elements {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.content {
+    word-break: break-word !important;
+}
+
+.img-fluid{
+    border-radius: 14px !important ;
+    width: 100% !important;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 -> 9/16x100 */
+    overflow: hidden;
+}
+
+.yt-video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.img-preview {
+    width: 200px;
+    height: 200px;
+    margin: 3px;
+}
+
+.play {
+    background: url('../../../../assets/img/icons/common/play-btn-red.png') no-repeat center center;   
+    background-size: 65px 50px;
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: .8;
+}
+
+.preview{
+    border: #e8e6e2 1px solid;
+    border-radius: 13px;
+    border-radius: 10px;
+    width: 100%;
+    .link-prev {
+        color: black;
+          .media{
+            .title {
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .description{
+                font-size:13px;
+            }
+            .link{
+                font-size:12px;
+                color: #9a9091;   
+            }  
+            .no-preview{
+                height:50px !important;
+                width: 50px;
+            }
+            .logo-preview{
+                width: 100px;
+                height: 100px;
+                
+          }     
+        }
+    }
+}

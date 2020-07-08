@@ -1,0 +1,84 @@
+<main>
+  <div class="container replies-timeline" *ngFor="let notif of notifs;let i=index;">
+    <div class="item-nosub ml-5" [routerLink]="['/post/',notif.parent_author,notif.parent_permlink]">
+      <div class="item-avatar-nosub">
+        <span class="avatar avatar-lg rounded-circle">
+          <a [routerLink]="['/profile/','@'+notif.author]">
+            <img alt="Image placeholder" src="{{ notif.author_accounts.author_profile_pic }}"
+            onError="this.src='assets/avatars/AVATAR.svg'"  width="40" height="40" />
+          </a>
+        </span>
+      </div>
+      <div class="media-body">
+        <a >
+          <span class="mb-0 avatar-name">{{ notif.author_accounts.author_name | lettercase:'ucfirst' }}
+          </span>
+          <!--Added Verified Badge-->
+          <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && notif.author_accounts.is_verified==1">
+            <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg">
+          </span>
+
+          <!--End of Verified Badge-->
+        </a>
+        <span class="username" href="#"> @{{ notif.author }}</span>
+        <span class="text-center"> . </span>
+        <span class="timestamp_hours" data-toggle="tooltip" data-placement="top"
+          title=""><small class="timeago">{{ notif.created | timeago:live }}</small></span>
+      </div>
+      <div class="section-blog-list content-holder">
+        <div class="replying">
+          <small class="replying text-sm mr-2">Replying to</small>
+          <small class="replying text-sm text-primary"><a [routerLink]="['/profile/','@'+notif.parent_author]">@{{ notif.parent_author }}</a></small>
+        </div>
+        <div class="media align-items-center">
+          <div class="media-body text-wrap mt-2">
+            <p class="mb-1 content" [innerHTML]="notif.body | lettercase:'utf8' | stripHTML"></p>
+          </div>
+        </div>
+        <div class="media align-items-center">
+          <div class="container-fluid">
+            <div class="row justify-content-md-left">
+              <div class="col">
+                <div class="inline-elements">
+                  <a class="heart">
+                    <i class="fa fa-heart  mr-2 ml-2"></i>
+                  </a>
+
+                  <span *ngIf="notif.post_has_rewards">{{ notif.voter_counter==0 ? '' : notif.voter_counter  | prettify:'pretty1'}}</span>
+
+                  <!--Decline Added-->
+                  <del *ngIf="!notif.post_has_rewards"><span>{{ notif.voter_counter==0 ? '' : notif.voter_counter  | prettify:'pretty1'}}</span></del>
+
+                </div>
+              </div>
+              <div class="col">
+                <a class="comment pointer">
+                  <img class="icon-reply" alt="Reply Icon" src="./assets/img/icons/svg/REPLY-GRAY.svg">
+                  <span>{{ notif.replies_count==0 ? '' : notif.replies_count | prettify:'pretty1'}}</span>
+                </a>
+              </div>
+             
+              <div class="col">
+                <a  class="share pointer">
+                  <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/flagneutral.svg">
+                </a> 
+
+                <!-- <a (click)="flagPost(reply,1)" class="share pointer">
+                  <img *ngIf="!reply.flagging && reply.flagged" class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/flagdown.svg">
+                  <img *ngIf="!reply.flagging && !reply.flagged" class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/flagneutral.svg">
+                  <i *ngIf="reply.flagging" class="fa fa-circle-o-notch fa-spin response"></i>
+                </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="mt-0 mb-0">
+  </div>
+  <div style="text-align: center;" class="mt-3 mb-2">
+    <span *ngIf="fetching">Loading...<i class="fa fa-refresh fa-spin"></i></span>
+    <span *ngIf="!fetching && notifs.length == 0">No notifications yet</span>
+  </div>
+  <br/>
+</main>

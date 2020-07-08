@@ -1,0 +1,29 @@
+
+.btn{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.btn-round{
+    border-radius: 25px !important;
+    text-decoration: none;
+    text-transform: none;
+    padding: 7px 20px 7px 20px;
+    margin: 5px
+}
+
+.btn-primary {
+    background-color: #E61C34;
+    border-radius: 25px !important;
+    text-decoration: none;
+    text-transform: none;
+    padding: 7px 20px 7px 20px;
+    margin: 5px;
+    &:hover span {
+      display:none
+    }
+  }
+
+.pointer {
+    cursor: pointer;
+}

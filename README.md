@@ -1,2 +1,2 @@
-# angular-client
-AngularJS implementation
+1. NPM INSTALL
+2. NG SERVE

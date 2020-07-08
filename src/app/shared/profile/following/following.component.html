@@ -1,0 +1,41 @@
+<div class=" section-blog-list profile-item mt-3" *ngFor="let row of data;let i =index;">
+  <div class="media align-items-center">
+    <span class="avatar avatar-l rounded-circle">
+      <a class="pointer" [routerLink]="['/profile/','@'+row.username]">
+        <img alt="Image placeholder" src="{{row.profile_pic}}" onError="this.src='assets/avatars/AVATAR.svg'"
+          width="50" height="50" /></a>
+    </span>
+    <div class="media-body justify-content-between ml-2">
+      <a [routerLink]="['/profile/','@'+row.username]">
+        <span class="mb-0 avatar-name url"><b>{{ (row.metadata?.name || row.username) | lettercase:'ucfirst-nod' }}</b>
+        </span>
+        <!--Added Verified Badge-->
+          <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && row.is_verified==1">
+            <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg"> 
+        </span>
+
+        <!--End of Verified Badge-->
+      </a>
+      <br /><span class="mb-0" href="#">
+        <small>@{{ row.username }}</small>  &nbsp;
+        <small class="badge badge-default" *ngIf="row.is_followed">Follows You</small>
+      </span>
+      <br /><span class="mb-0"><small class="text-wrap">{{ row.metadata?.about }}</small></span>
+    </div>
+
+    <span class=" text-right mr-3" *ngIf="row.username!==auth_username">
+      <button class="btn btn-outline-primary btn-round" type="button" *ngIf="!row.is_following && !row.following"
+        (click)="follow(row)">Follow</button>
+      <button class="btn btn-primary btn-following" *ngIf="row.is_following && !row.following" type="button"
+        (click)="follow(row)"><span>Unfollow</span></button>
+      <button class="btn btn-outline-primary btn-round" type="button" *ngIf="row.following"><i
+          class="fa fa-spinner fa-spin"></i></button>
+    </span>
+  </div>
+  <hr class="mt-1 mb-0">
+</div>
+
+<div class="text-center mt-3 mb-2">
+  <span *ngIf="fetching && !fetchedall">Loading...<i class="fa fa-refresh fa-spin"></i></span>
+  <span *ngIf="!fetching && data.length == 0">No following found</span>
+</div>

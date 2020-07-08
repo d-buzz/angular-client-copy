@@ -1,0 +1,25 @@
+
+  <div class="trends mobile-bottom">
+    <div class="list-group rounded-circle">
+      <div style="text-align: center;">
+        <span *ngIf="fetching">Loading trends <i class="fa fa-spinner fa-spin"></i></span>
+        <span *ngIf="!fetching && tags.length==0">No trends found</span>
+      </div>
+      <div class="trending-list" *ngFor="let tag of tags;let i=index;">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mt-1 mb-0 text-muted trending-font">
+              <span class="text-center">{{ i+1 }} </span>
+              <span class="text-cente mt--3">.</span>
+              <span class="text-center"> Trending</span>
+            </p>
+            <!-- <small class="text-muted"><i class="fa fa-angle-down"></i></small> -->
+          </div>
+          <span class="font-weight-bold mb-0 mt--3">#{{ tag?.name }}</span>
+          <p class="mb-0 text-muted number-tweets">
+            <span class="text-nowrap">{{ tag?.top_posts + tag?.comments | prettify:'pretty' }} Buzz's</span>
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,20 @@
+<app-notices class="d-none d-sm-block"></app-notices>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <app-s-left [data]="data" (refreshList)="refreshList($event)"></app-s-left>
+    </div>
+    <div class="col-md-6">
+      <app-navbar [data]="data" [feed]="feed" (refreshList)="refreshList($event)"></app-navbar>
+      <app-home-feed [loading]="loading" [data]="data" [fetchedall]="fetchedall" (fetchNewFeeds)="showMoreFeed($event)"
+        (refreshList)="refreshList($event)"></app-home-feed>
+    </div>
+    <div class="col-md-4">
+      <app-s-right [data]="data"></app-s-right>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#d32e2e" type="line-spin-clockwise-fade">
+  <p style="font-size: 20px; color: white">Please wait...</p>
+</ngx-spinner>
+  

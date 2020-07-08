@@ -1,0 +1,57 @@
+<div class="modal-header">
+  <div class="float-left">
+    <div class="row align-items-center">
+      <div class="co-2">
+        <button type="button" class="close close_btn" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+          <span aria-hidden="true"><i class="fa fa-close"></i></span>
+        </button>
+      </div>
+      <div class="col">
+        <h6 class="font-weight-bold ls-1 mb-0">Upvoted by</h6>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngFor="let row of upvoters; let i=index;">
+  <div class="section-blog-list profile-item mt-1">
+    <div class="media align-items-center pl-4">
+      <span class="avatar avatar-l rounded-circle">
+        <a (click)="gotoProfile(row.author_accounts.author)" class="pointer">
+          <img alt="Image placeholder" src="{{ row.author_accounts?.author_profile_pic }}" width="50" height="50"
+            onError="this.src='assets/avatars/AVATAR.svg'" /></a>
+      </span>
+      <div class="media-body ml-2 justify-content-between">
+        <span class="mb-0 avatar-name pointer"><a
+            (click)="gotoProfile(row.author_accounts.author)"><b>{{ row.author_accounts?.author_name | lettercase:'ucfirst-nod'}}</b></a>
+        </span>
+        <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && row.author_accounts?.is_verified==1">
+          <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg"> 
+        </span>
+        <br /><span class="username mb-0">@{{ row.author_accounts?.author }}</span>
+        <br /><span class="about mb-0">{{ row.author_accounts?.author_about }}</span>
+      </div>
+      <span class="blog_promoted text-right mr-3">
+        <span *ngIf="row.author_accounts?.author!==auth_username">
+          <button *ngIf="!row.is_following && !row.voter_is_followed"
+          class="btn btn-outline-danger btn-round" type="button" (click)="follow(row)">Follow</button>
+        <button *ngIf="!row.is_following && row.voter_is_followed"
+          class="btn btn-primary btn-follow" type="button" (click)="follow(row)"><span>Following</span></button>
+        <button *ngIf="row.is_following" class="btn btn-outline-danger btn-round" type="button"><i
+            class="fa fa-spinner fa-spin"></i></button>
+        </span>
+      </span>
+    </div>
+  </div>
+  <hr class="mt-1 mb-0">
+</div>
+
+<div class="ml-4 d-flex justify-content-center">
+  <span *ngIf="showing"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+  <button *ngIf="show_more && !showing" type="button" class="btn btn-link" (click)="showMore()">Show More</button>
+</div>
+
+<div class="modal-footer details ml-4 text-sm text-wrap">
+  <!-- <small>Pending payout amount: $0.01</small>
+  <small>Breakdown: 0.00 SBD, 0.02 STEEM, 0.02 SP</small>
+  <small>Payout in 2 hours (amount must reach $0.02 for payout)</small> -->
+</div>

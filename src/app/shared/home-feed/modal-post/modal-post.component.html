@@ -1,0 +1,90 @@
+<div class="modal-header">
+  <img src="./assets/img/brand/dbuzz.svg" class="navbar-brand-img" alt="..." height="30px">
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true"><i class="fa fa-close"></i></span>
+  </button>
+</div>
+<form role="form" name="steemModalForm" (ngSubmit)="postComment();" [formGroup]="steemModalForm" novalidate>
+  <div class="modal-body">
+    <div class="section-blog-list profile-item mt-0">
+      <div class="media align-items-center">
+        <span class="avatar avatar-sm rounded-circle">
+          <img alt="Image placeholder" src="{{ feed.author_accounts?.author_profile_pic }}"
+            onError="this.src='assets/avatars/AVATAR.svg'" width="40" height="40" />
+        </span>
+        <div class="media-body ml-2 justify-content-between">
+          <span class="mb-0 avatar-name"><b>{{ feed.author_accounts?.author_name | lettercase:'ucfirst' }}</b>
+          </span>
+          <!--Added Verified Badge-->
+          <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && feed.author_accounts?.is_verified==1">
+            <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg">
+          </span>
+
+          <!--End of Verified Badge-->
+          <span class="username" href="#"><small> @{{ feed.author }}</small></span>
+          <span class="text-center"> . </span>
+          <span class="timestamp_hours"><small class="timeago"> {{ feed.created | dateago }}</small></span>
+        </div>
+      </div>
+    </div>
+    <div class="section-blog-list content-holder">
+      <div class="media align-items-center">
+        <div class="media-body pl-5">
+          <div class="row ">
+            <div class="col-md-12 text-wrap">
+              <p class="content" [innerHTML]="feed.body | lettercase:'utf8' | stripHTML | markdown"> </p>
+              <div (click)="playVideo(feed)" *ngIf="feed.has_video" class="video-wrapper" [innerHTML]="feed.video_html"></div>
+            </div>
+          </div>
+          <div *ngIf="feed.preview_link && feed.link_metadata" class="preview mb-2">
+            <a *ngIf="feed.link_metadata" class="link-prev" href="{{ feed.link_metadata?.url }}" target="_blank">
+              <div class="media align-items-center position-relative">
+                <img class="ml-2 mr-2 text-wrap rounded no-preview" *ngIf="!feed.link_metadata?.image" src="assets/img/icons/svg/NO-PREVIEW.svg">
+                <img class="mr-2 text-wrap rounded logo-preview" *ngIf="feed.link_metadata?.image" src="{{ feed.link_metadata?.image }}" onError="this.src='assets/img/icons/svg/NO-PREVIEW.svg';this.className='ml-2 mr-2 text-wrap rounded no-preview'">                 
+                <div class="media-body text-wrap mb-0 mr-1" *ngIf="feed.link_metadata?.url">
+                  <p class="title mb-0" *ngIf="feed.link_metadata?.title">{{ feed.link_metadata?.title }}</p>
+                  <p class="description mb-0" *ngIf="feed.link_metadata?.description">{{ feed.link_metadata?.description.substr(0,100) + '.....' }}</p>
+                  <a href="{{ feed.link_metadata?.url }}" target="_blank" class="text-mute text-sm link"> <i class="fa fa-link"></i>
+                   <span class="text-wrap mr-2"> {{ feed.link_metadata?.url.substr(0,30) + '...' }}</span>
+                  </a>                   
+                </div>
+              </div> 
+            </a>
+          </div>
+          <span *ngFor="let tag of feed?.tags">
+            <a href="#">#{{ tag.replace(' ','') }}</a>&nbsp;
+          </span>
+          <span *ngIf="feed?.tags.length > 0"><br/></span>
+          <span>Replying to <a href="#">@{{ feed.author }}</a></span>
+        </div>
+
+      </div>
+    </div>
+    <div class="section-blog-list profile-item mt-0">
+      <div class="media align-items-center">
+        <span class="avatar avatar-sm rounded-circle">
+          <img alt="Image placeholder" src="{{ feed.auth_profile_pic }}" onError="this.src='assets/avatars/AVATAR.svg'"
+            width="40" height="40" />
+        </span>
+        <div class="media-body ml-2 justify-content-between">
+          <!-- <span class="mb-0 avatar-name"><b>{{ auth_data?.name }}</b>
+          </span> -->
+          <textarea rows="4" class="form-control mt-3" formControlName="post" placeholder="Buzz your reply" autofocus
+            (keyup)="updateCounter();autosize($event)" autofocus></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row justify-content-md-left ">
+      <div class="float-right">
+        <span id="counterm_lbl">{{counter}}</span>
+        <span class=" mr-2"> |</span>
+        <button *ngIf="!submitting" class="btn btn-primary" type="submit"
+          [disabled]="steemModalForm.invalid">Reply</button>
+        <button *ngIf="submitting" class="btn btn-primary" type="button" disabled><i
+            class="fa fa-spinner fa-spin"></i></button>
+      </div>
+    </div>
+  </div>
+</form>

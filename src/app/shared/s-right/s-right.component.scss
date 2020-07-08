@@ -1,0 +1,46 @@
+
+.has-search .form-control {
+  padding-left: 3.375rem;
+  border-radius: 50px;
+}
+
+.has-search .form-control:focus {
+  color: #8898aa;
+  background-color: #fff;
+  border-color: #E61C34;
+  outline: 0;
+  box-shadow: none, none;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+  margin-top: 3px;
+
+  &:focus {
+    color: #E61C34;
+  }
+}
+
+input.form-control {
+  font-size: 16px;
+  border-style: solid;
+}
+
+.tag-name{
+  color: #14171a;
+  font-weight: 700;
+
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,0 +1,100 @@
+<main>
+  <section class="section section-lg login-background">
+    <div class="container">
+      <div class="row row-grid align-items-center">
+        <div class="col-md-6 order-md-2 d-none d-sm-block">
+          <div class="pr-md-5">
+          
+                <div class="card card-lift--hover bg-default shadow border-0">
+                  <img src="./assets/login/sample.png" class="card-img-top">
+                  <blockquote class="card-blockquote">
+                    <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="svg-bg">
+                      <polygon points="0,52 583,95 0,95" class="fill-default" />
+                      <polygon points="0,42 583,95 683,0 0,95" opacity=".2" class="fill-default" />
+                    </svg>
+                    <ul class="list-unstyled mt-5 text-white">
+                      <li class="py-2 ">
+                        <div class="d-flex align-items-center mt-4">
+                          <div>
+                            <div class="mr-3">
+                              <i class="ni ni-user-run"></i>
+                            </div>
+                          </div>
+                          <div>
+                            <h6 class="mb-0 mr-3 text-white">Follow your interests.</h6>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="py-2">
+                        <div class="d-flex align-items-center mt-4">
+                          <div>
+                            <div class="mr-3">
+                              <i class="ni ni-headphones"></i>
+                            </div>
+                          </div>
+                          <div>
+                            <h6 class="mb-0 mr-3 text-white">Hear what people are talking about.</h6>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="py-2">
+                        <div class="d-flex align-items-center mt-4">
+                          <div>
+                            <div class="mr-3">
+                              <i class="ni ni-chat-round"></i>
+                            </div>
+                          </div>
+                          <div>
+                            <h6 class="mb-0 mr-3 text-white">Join the conversation</h6>
+                          </div>
+                        </div>
+                        
+                      </li>
+                    </ul>
+                  </blockquote>
+              </div>
+
+          </div>
+        </div>
+        <div class="col-md-6 order-md-2">
+          <div class="pr-md-5 ">
+            <a class="navbar-brand pt-0" routerLinkActive="active" [routerLink]="['/dashboard']">
+              <img src="./assets/img/brand/dbuzz.svg" class="navbar-brand-img" alt="...">
+            </a>
+        
+            <h3 class="font-weight-bold mr-5">Discover the Buzz on dBuzz.</h3>
+                     
+            <ul class="list-unstyled mt-5">
+              <p class="font-weight-bold mt--7">Join us now.</p>  
+              <!-- <li class="py-2">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <button class="btn btn-lg btn-info" type="button">Sign up</button>
+                  </div>
+                </div>
+              </li> -->
+              <li class="py-2">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <button (click)="signIn()" class="btn btn-outline-primary btn-lg" type="button">Login</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </div> 
+  
+  </section>
+
+  <app-login-footer></app-login-footer>
+
+
+</main>
+
+
+
+
+

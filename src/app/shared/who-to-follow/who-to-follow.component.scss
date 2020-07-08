@@ -1,0 +1,48 @@
+.right-sidebar {
+  background-color: #f5f8fa !important;
+  border-radius: 28px !important;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-round {
+  border-radius: 25px !important;
+  text-decoration: none;
+  text-transform: none;
+  padding: 7px 20px 7px 20px;
+  margin: 5px
+}
+
+.about{
+  font-size: 14px;
+}
+
+.url a{
+  color: #14171a;
+  cursor: pointer;
+  &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+  }   
+}
+.btn-following {
+  background-color: #E61C34;
+  border-radius: 25px !important;
+  text-decoration: none;
+  text-transform: none;
+  padding: 7px 20px 7px 20px;
+  margin: 5px;
+  &:hover span {
+    display:none
+  }
+  &:hover::after {
+    content: 'Unfollow';
+  }
+}

@@ -1,0 +1,44 @@
+<nav class="sticky-top mt-1 mb-0 ">
+  <!-- Actual search box -->
+  <div class="form-group has-search d-none d-sm-block" *ngIf="!is_searching">
+    <span class="ml-3 mr-4 fa fa-search form-control-feedback"></span>
+    <input type="text" class="form-control" [formControl]="search_key" (keyup.enter)="searchItems()" placeholder="Enter search key (username)">
+  </div>
+  <main class="d-none d-sm-block mt-2" *ngIf="showtrends">
+    <div class="right-sidebar">
+      <div class="list-group rounded-circle">
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="row align-items-center">
+            <div class="col">
+                <h5 class="header-font ls-1 mb-0">Trending</h5>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <span *ngIf="fetching">Loading trends <i class="fa fa-spinner fa-spin"></i></span>
+          <span *ngIf="!fetching && tags.length==0">No trends found</span>
+        </div>
+        <div *ngFor="let tag of tags;let i=index;">
+          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <p class="mb-0 text-muted trending-font">
+                <span class="text-center">{{ i+1 }} </span>
+                <span class="text-cente mt--3">.</span>
+                <span class="text-center"> Trending</span>
+              </p>
+            </div>
+            <span class="mb-0 mt--3 tag-name">#{{ tag?.name }}</span>
+            <p class="mb-0 text-muted number-tweets">
+              <span class="text-nowrap">{{ tag?.top_posts + tag?.comments | prettify:'pretty' }} Buzz's</span>
+            </p>
+          </a>
+        </div>
+        <a (click)="gotoTrends()" class="list-group-item list-group-item-action flex-column align-items-start link">
+          <span class="text-danger" *ngIf="tags.length>0">Show More</span>
+        </a>
+      </div>
+    </div>
+  </main>
+  <app-who-to-follow [data]="data" [showtofollow]="showtofollow"></app-who-to-follow>
+</nav>
+

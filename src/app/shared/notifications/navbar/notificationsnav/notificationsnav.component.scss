@@ -1,0 +1,44 @@
+.sticky-top {
+    position: sticky !important;
+}
+  
+.navbar {
+    align-items: flex-start !important;
+    padding: 3px;
+    display: block;
+}
+
+.navbar-nav .nav-link
+{
+    padding-right: 0;
+    padding-left: 10%;
+    font-size: 19px;
+    color: #14171A;
+    font-weight: 700;
+}
+
+.profile-name {
+    font-weight: 700;
+    font-size: 19px;
+    color: #14171a;
+}
+
+.url {
+    color: #14171a;
+    cursor: pointer;
+}
+
+
+
+  .item-align {
+    left: 10%; 
+    top: 2%; 
+    padding: 0rem 0rem 0rem 5%;
+  }
+
+
+  .settings{
+    margin-top: -30px;
+
+  }
+ 

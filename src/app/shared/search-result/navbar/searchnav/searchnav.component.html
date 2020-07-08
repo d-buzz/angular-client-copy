@@ -1,0 +1,34 @@
+<nav class="navbar bg-white sticky-top card d-none d-sm-block"> 
+  <div class="media align-items-center text-left ls-2 mt-3 mb-3 sticky-top">
+    <div class="media-body ml-2 justify-content-between">
+      <div class="ml-3">
+        <a (click)="backUrl()" class="mr-2"><i class="ni ni-bold-left url"></i></a>
+        <span class="profile-name ls-1 mb-0">Explore</span>
+      </div>
+      <div class="form-group has-search ml-3">
+        <span class="ml-3 mr-3 fa fa-search form-control-feedback"></span>
+        <input type="text" class="form-control" [formControl]="search_key" value="{{query}}" placeholder="Enter search key (username)" (keyup.enter)="lookupItems()" autofocus>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!--Fixed Top Navbar for mobile-->
+
+<nav class="navbar navbar-light bg-white sticky-top border-bottom d-block d-sm-none">
+  <div class="media align-items-center text-left ls-2 mt--5 sticky-top">
+    <div class="media-body ml-2 justify-content-between">
+      <div class="ml-3 mb-2">
+        <a  class="mr-2"><i class="ni ni-bold-left url"></i></a>    
+        <span class="profile-name ls-1 mb-0">Explore</span>
+      </div>
+      <div class="form-group has-search">
+        <span class="mr-3 fa fa-search form-control-feedback"></span>
+        <input type="text" class="form-control" [formControl]="search_key" value="{{query}}"  placeholder="Enter search key (username)" (keyup.enter)="lookupItems()" autofocus>
+      </div>
+     
+    </div>
+  
+  </div>
+</nav>
+<app-mobile-menu></app-mobile-menu>

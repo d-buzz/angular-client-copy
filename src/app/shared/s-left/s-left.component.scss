@@ -1,0 +1,285 @@
+.navbar {
+  position: relative;
+  display: flex;
+  padding: 1rem 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar > .container,
+.navbar > .container-fluid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.navbar-nav .nav-link {
+  padding-right: 0;
+  //  padding-left: 10%;
+  font-size: 19px;
+  color: #14171a;
+  font-weight: 700;
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+
+.navbar-brand img {
+  height: 41px !important;
+  margin-bottom: 19px !important;
+}
+
+.navbar-collapse {
+  flex-basis: 100%;
+  flex-grow: 5;
+  align-items: center;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #e61c34;
+  border-color: #e61c34;
+  padding-left: 15px;
+  width: 100%;
+  border-radius: 184px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  text-transform: none;
+}
+.btn-outline-danger{
+  border-radius: 184px;
+  text-decoration: none;
+  text-transform: none;
+
+}
+.sticky-top {
+  position: sticky !important;
+}
+
+.icon-trending, .ni-user-run {
+  width: 30px !important;
+  height: 30px !important;
+
+}
+
+.icon-home, .icon-friends, .icon-latest{
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.icon-logout{
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.icon-notification{
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.profile-pic {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.prof-pic-selected {
+  width: 30px !important;
+  height: 30px !important;
+  border: 2px solid #e61c34;
+}
+
+.nav-link {
+  font-weight: 700 !important;
+  color: #14171a !important;
+  font-size: 17px !important;
+  
+
+  &:hover{
+    color: #e61c34;
+  }
+
+  &:hover:not(.active) {
+    background-color: #fbdcdf;
+    border-radius: 26px;
+    -webkit-border-radius: 26px;
+    -moz-border-radius: 26px;
+    // padding: 6px 6px;
+ }
+
+ .pointer {
+    cursor: pointer;
+  }
+
+  .nav-selected {
+    color: #e61c34
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+  .icon-autoarrange {
+    position: absolute;
+    top: 180%;
+    left: 30%;
+    transform: translate(-37%, -37%);
+    display: block !important;
+    margin: 0;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1399px){
+  .icon-autoarrange-lg {
+    position: absolute;
+    top: 33%;
+    left: -10%;
+    transform: translate(-50%, -37%);
+    display: flex !important;
+    margin: 0;
+  }
+}
+
+/* LAPTOP */
+@media only screen 
+  and (max-width: 1024px) 
+  and (max-height: 1024px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    #sidenav-main {
+      top: 25%;
+      white-space: nowrap;
+      transform: translate(-30%, -50%);
+    }
+    #sidenav-main > ul {
+      display: inline-block;
+    }
+}
+
+/* Tablet 768 x 1024 */
+@media only screen 
+  and (max-width: 768px) 
+  and (max-height: 1024px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    #sidenav-main {
+      top: 0%;
+      white-space: nowrap;
+      transform: translate(-30%, -50%);
+    }
+}
+
+/* Portrait of IPAD*/
+@media (max-width: 768px) 
+  and (max-height: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    #sidenav-main {
+      transform: translate(-25%, 10%);
+    }
+}
+
+/* Landscape of the IPAD*/
+@media (max-width: 1024px)
+and (max-height: 768px) 
+and (orientation: landscape) 
+and (-webkit-min-device-pixel-ratio: 2) {
+  #sidenav-main {
+    white-space: nowrap;    
+    transform: translate(-25%, -50%) scale(0.8);
+  }
+
+  #sidenav-main > li {
+    display: inline-block;
+  }
+}
+
+/* Landscape of the IPAD PRO*/
+@media (min-device-width: 1366px) 
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    #sidenav-main {
+      white-space: nowrap;
+      top: 0%;
+      transform: translate(-43%, 0%);
+    }
+
+    #sidenav-main > li {
+      display: inline-block;
+    }
+}
+
+/* Portrait of the IPAD PRO*/
+@media (min-device-width: 1024px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    #sidenav-main {
+      white-space: nowrap;
+      top: 0%;
+      transform: translate(-30%, -4%) scale(0.9);
+    }
+
+    #sidenav-main > li {
+      display: inline-block;
+    }
+}
+
+/* Landscape for iPHONE X, fixing the broken images */
+@media (min-device-width: 812px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) { 
+    #sidenav-main {
+      top: 0%;
+      transform: translate(-30%, -4%) scale(1);
+    }
+    
+}
+
+/* Landscape for PIXEL 2 XL */
+@media (min-device-width: 823px) 
+  and (max-device-width: 823px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) { 
+    #sidenav-main {
+      top: 0%;
+      transform: translate(-30%, -4%) scale(1);
+    }
+    
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.375rem;
+  font-size: 100%;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  position: absolute !important;
+  margin-top: -9px !important;
+  margin-left: 9px !important;
+  font-weight: 700 !important;
+}
+
+.subscribe{
+  width: 100% !important;
+  color: #fff !important;
+  background-color: #e61c34 !important;
+  border-color: #e61c34 !important;
+  padding-left: 15px !important;
+  border-radius: 184px !important;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+}

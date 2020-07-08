@@ -1,0 +1,135 @@
+<main>
+  <div *ngFor="let feed of data;let i =index;">
+    <hr class="mt-0 border-none mb-0">
+    <div class="card-body pointer">
+      <div class="container-fluid">
+        <div class="section-blog-list profile-item" (click)="viewPost(feed)">
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <a [routerLink]="['/profile/','@'+feed.author]"> <img alt="Image placeholder"
+                  src="{{ feed.author_accounts?.author_profile_pic }}" onError="this.src='assets/avatars/AVATAR.svg'"
+                  width="40" height="40"></a>
+            </span>
+            <div class="media-body ml-2 justify-content-between">
+              <span class="mb-0 avatar-name url" [ngbPopover]="popContent" triggers="mouseenter:mouseleave"
+                [openDelay]="500" [closeDelay]="800" *ngIf="feed.author!==auth_username"><a
+                  [routerLink]="['/profile/','@'+feed.author]"><b>{{feed.author_accounts?.author_name | lettercase:'ucfirst' }}</b></a></span>
+              <span class="mb-0 avatar-name url" *ngIf="feed.author==auth_username"><a
+                  [routerLink]="['/profile/','@'+feed.author]"><b>{{feed.author_accounts?.author_name | lettercase:'ucfirst'}}</b></a></span>
+  
+              <!--Added Verified Badge-->
+              <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && feed.author_accounts.is_verified==1">
+                <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg">
+              </span>
+              <!--End Verified Badge-->
+              
+              <span class="username" href="#"> @{{feed.author}}</span>
+              <span class="text-center"> . </span>
+              <span class="timestamp_hours" data-toggle="tooltip" data-placement="top"
+                title="{{ feed?.created_dt }}"><small class="timeago"> {{ feed.created | timeago:live }}</small></span>
+              <ng-template class="content-popover" #popContent>
+                <app-popover-detail [data]="feed"></app-popover-detail>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="section-blog-list content-holder">
+          <div class="media align-items-center">
+            <div class="media-body pl-5">
+              <p class="mb-2 content" [innerHTML]="feed.body | lettercase:'utf8' | stripHTML | markdown" (click)="viewPost(feed)"></p>
+              <div (click)="playVideo(feed)" *ngIf="feed.has_video"  class="video-wrapper" [innerHTML]="feed.video_html"></div>
+               <!--Link Preview-->
+               <div *ngIf="feed.preview_link && feed.link_metadata" class="preview mb-2">
+                <a *ngIf="feed.link_metadata" class="link-prev" href="{{ feed.link_metadata?.url }}" target="_blank">
+                  <div class="media align-items-center position-relative">
+                    <img class="ml-2 mr-2 text-wrap rounded no-preview" *ngIf="!feed.link_metadata?.image" src="assets/img/icons/svg/NO-PREVIEW.svg">
+                    <img class="mr-2 text-wrap rounded logo-preview" *ngIf="feed.link_metadata?.image" src="{{ feed.link_metadata?.image }}" onError="this.src='assets/img/icons/svg/NO-PREVIEW.svg';this.className='ml-2 mr-2 text-wrap rounded no-preview'">                 
+                    <div class="media-body text-wrap mb-0 mr-1" *ngIf="feed.link_metadata?.url">
+                      <p class="title mb-0" *ngIf="feed.link_metadata?.title">{{ feed.link_metadata?.title }}</p>
+                      <p class="description mb-0" *ngIf="feed.link_metadata?.description">{{ feed.link_metadata?.description.substr(0,100) + '.....' }}</p>
+                      <a href="{{ feed.link_metadata?.url }}" target="_blank" class="text-mute text-sm link"> <i class="fa fa-link"></i>
+                       <span class="text-wrap mr-2"> {{ feed.link_metadata?.url.substr(0,30) + '...' }}</span>
+                      </a>                   
+                    </div>
+                  </div> 
+                </a>
+              </div>
+              <!---EOF Link  Preview-->
+                <span *ngFor="let tag of feed.tags">
+                  <a href="#">#{{ tag.replace(' ','') }}</a>&nbsp;
+                </span>
+            </div>
+          </div>
+          <div class="media align-items-center">
+            <div class="container-fluid pl-5 mt-0">
+              <div class="row justify-content-md-left">
+                <div class="col">
+                  <div class="inline-elements">
+                    <a (click)="showSliderPost(feed, i)" class="heart pointer">
+                      <i *ngIf="!feed.voting && feed.user_is_voter" class="fa fa-heart  mr-2 ml-2 response"></i>
+                      <i *ngIf="!feed.voting && !feed.user_is_voter" class="fa fa-heart  mr-2 ml-2"></i>
+                      <i *ngIf="feed.voting" class="fa fa-circle-o-notch fa-spin response"></i>
+
+                    </a>
+
+                    <span class="responses" *ngIf="feed.post_has_rewards">{{ feed.voter_counter == 0 ? '' : (feed.voter_counter | prettify:'pretty1') }}</span>
+
+                    <!--Decline Added-->
+                    <del *ngIf="!feed.post_has_rewards"><span class="responses">{{ feed.voter_counter == 0 ? '' : (feed.voter_counter | prettify:'pretty1') }}</span></del>
+                    <div class="cslider" *ngIf="showSlider == i">
+                      <span class="pointer" (click)="upvote(feed,i)"><i class="fa fa-chevron-up"></i></span>
+                      <span>{{ sliderControl.value }}%</span>
+                      <ng5-slider [options]="options" [formControl]="sliderControl"></ng5-slider>
+                      <span (click)="showSliderPost(feed, 'hide')"><i class="fa fa-times" aria-hidden="true"></i></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <a (click)="comment(feed,i)" class="comment pointer">
+                    <img class="icon-reply" alt="Reply Icon" src="./assets/img/icons/svg/REPLY-GRAY.svg">
+                    <span class="responses" id="replies_count_{{i}}">
+                      {{ feed.replies_count == 0 ? '': (feed.replies_count | prettify:'pretty1') }}</span>
+                  </a>
+                </div>
+                <!-- <div class="col">
+                  <a (click)="resteem(feed,i)" class="retweet pointer">
+                    <img *ngIf="!feed.reblogging && feed.is_reblogged" src="./assets/img/icons/svg/REPOST-BLUE.svg">
+                    <img *ngIf="!feed.reblogging && !feed.is_reblogged" src="./assets/img/icons/svg/REPOST-GRAY.svg">
+                    <i *ngIf="feed.reblogging" class="fa fa-circle-o-notch fa-spin response"></i>
+                    <span class="responses">
+                      {{ feed.reblog_count == 0 ? '' : (feed.reblog_count | prettify:'pretty1') }}</span>
+                  </a>
+                </div> -->
+                
+                <div class="col">
+                  <a (click)="flagPost(feed)" class="share pointer">
+                    <img *ngIf="!feed.flagging && feed.flagged" class="icon-forward" alt="Reply Icon"
+                      src="./assets/img/icons/svg/flagdown.svg">
+                    <img *ngIf="!feed.flagging && !feed.flagged" class="icon-forward" alt="Reply Icon"
+                      src="./assets/img/icons/svg/flagneutral.svg">
+                    <i *ngIf="feed.flagging" class="fa fa-circle-o-notch fa-spin response"></i>
+                  </a>
+                </div>
+                <div class="col" *ngIf="twitter_verification_enable && auth_is_verified">
+                  <a (click)="share(feed)" class="share pointer">
+                    <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/FORWARD-GRAY.svg">
+                  </a>
+                </div>
+                <!-- <div class="col" *ngIf="!twitter_verification_enable">
+                  <a (click)="share(feed)" class="share pointer">
+                    <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/FORWARD-GRAY.svg">
+                  </a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="mt-0 mb-0">
+  </div>
+  <div style="text-align: center;" class="mt-3 mb-2">
+    <span *ngIf="searching">Loading...<i class="fa fa-refresh fa-spin"></i></span>
+    <span *ngIf="!searching && data.length == 0">No latest posts found</span>
+  </div>
+</main>

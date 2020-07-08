@@ -1,0 +1,31 @@
+.tabset a.nav-link{
+    margin-top: 5px;
+}
+
+.tabset a.nav-link.active {
+    color: #E61C34;
+    font-weight: bold;
+    border-bottom-width: 2px;
+    border-bottom-color:  #E61C34;
+    margin-top: 5px;
+}
+.url a {
+    color: #14171a !important;
+    cursor: pointer;
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }   
+}
+
+.col-md-6{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+  }
+  
+  .mobile-bottom {
+    margin-bottom: 10rem !important;
+  }

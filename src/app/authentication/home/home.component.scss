@@ -1,0 +1,34 @@
+.col-md-6{
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.btn-showmore {
+    margin : 10px;
+    width: 100%;
+    padding : 10px;
+    text-align: center
+}
+.btn-showmore:hover {
+    -webkit-box-shadow: 2px 3px 32px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 3px 32px -1px rgba(0,0,0,0.75);
+    box-shadow: 2px 3px 32px -1px rgba(0,0,0,0.75);
+}
+.btn-showmore:active {
+    background: rgb(155, 150, 150)
+}
+
+.fetching:hover {
+    box-shadow: none !important
+}
+.fetching:active {
+    background: transparent
+}
+
+.col-md-6{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}

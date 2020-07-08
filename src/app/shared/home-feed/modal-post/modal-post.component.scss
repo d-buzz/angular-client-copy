@@ -1,0 +1,27 @@
+textarea.form-control {
+    overflow:hidden;
+    display:inline-block;
+    padding-bottom: -28px;
+    padding-bottom: -39px;
+    resize: none;
+    font-size: 18px;
+    height:2.5em;
+    border-style: none;
+    word-wrap: break-word;
+}
+
+.close_btn {
+    font-size:48px;
+}
+
+.btn-primary {
+    background-color: #E61C34;
+    border-radius: 25px !important;
+    text-decoration: none;
+    text-transform: none;
+    cursor: pointer;
+  }
+
+.content {
+    word-break: break-word !important;
+}

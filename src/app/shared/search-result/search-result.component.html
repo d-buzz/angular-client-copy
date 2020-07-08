@@ -1,0 +1,26 @@
+
+<app-searchnav [query]="search_key" (startSearch)="startSearch($event)"></app-searchnav>
+<main>
+  <div class="card mob-bottom">
+    <div class="tabs mt-lg-0 ">
+      <ngb-tabset [justify]="'fill'" class="tabset">
+        <ngb-tab title="Latest">
+          <ng-template ngbTabContent>
+            <app-latest [searching]="searching_latest" [data]="latest"></app-latest>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="People">
+          <ng-template ngbTabContent>
+            <app-people [searching]="searching_people" [data]="people"></app-people>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Witness">
+          <ng-template ngbTabContent>
+            <app-witness [searching]="searching_witnesses" [data]="witnesses"></app-witness>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div> 
+  </div>
+</main>
+

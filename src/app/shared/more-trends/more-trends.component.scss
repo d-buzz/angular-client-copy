@@ -1,0 +1,32 @@
+.trends{
+    .header-font{
+        font-weight: 700;
+        color: #14171A;
+    }
+    .trending-list{
+        .list-group-item{
+            padding-left: 15px;
+            .d-flex{
+                .trending-font{
+                    span{
+                        font-size:13px;
+                    }
+
+                }
+
+            }
+            .tags{
+                color: #14171A;
+                font-size: 14px;
+            }
+            .number-tweets{
+                font-size: 14px;
+            }
+        }
+
+    }
+}
+
+.mobile-bottom {
+    margin-bottom: 10rem !important;
+}

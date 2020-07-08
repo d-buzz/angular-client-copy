@@ -1,0 +1,129 @@
+<main>
+  <div class="card mobile-bottom" id="profilefeed">
+    <div class="row">
+      <div class="cover-photo">
+        <img src="{{ profile?.cover_image }}" onError="this.src='assets/avatars/cover.jpg'">
+      </div>
+      <div class="col-lg-4">
+        <div class="card-profile-stats d-flex justify-content-md-left px-2">
+          <img src="{{ profile?.profile_image }}" class="rounded-circle avatar-lg"
+            onError="this.src='assets/avatars/AVATAR.svg'">
+        </div>
+      </div>
+      <div class="card-profile-stats col-lg-8 order-lg-3 text-right element-arrange">
+        <div class="mt-2 mr-1 d-flex pull-right">
+          <!-- <button *ngIf="auth_username === profile?.username" class="btn btn-outline-danger">Edit profile</button> -->
+          <button *ngIf="twitter_verification_enable && auth_username == profile?.username && is_subscribed && !is_verified" href="javascript:void(0)"
+          class="btn btn-outline-danger" (click)="verifyAccount()">Verify Account</button> 
+          <button (click)="follow(profile)"
+          *ngIf="auth_username !== profile?.username && profile?.is_following==0 && !following"
+          class="btn btn-outline-danger">Follow</button>
+          <button (click)="follow(profile)"
+            *ngIf="auth_username !== profile?.username && profile?.is_following==1 && !following"
+            class="btn btn-primary btn-following"><span>Following</span></button>
+          <button (click)="follow(profile)" *ngIf="auth_username !== profile?.username && following"
+            class="btn btn-outline-danger"><i class="fa fa-spinner fa-spin"></i></button>
+            <img class="icon-wallet mr-3" alt="Wallet" src="./assets/img/icons/svg/WALLET-RED.svg"
+            (click)="openViewWallet()" *ngIf="auth_username == profile?.username" id="wallet-info">
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4 mb-5" *ngIf="fetching">
+      <span><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+    </div>
+
+    <div class="profile-details px-3 mt-4 mb-3" *ngIf="!fetching">
+      <div class="fullname">
+        <h6 class="font-weight-bold mb-0">{{ profile.name | lettercase:'ucfirst-nod'}}
+          <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && profile.is_verified">
+            <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg">
+          </span>
+        </h6>
+      </div>
+      <div class="username mb-0">
+        <span class="text-sm text-muted" *ngIf="profile.username">@{{ profile.username }}</span>
+        &nbsp; <small class="badge badge-default"
+          *ngIf="auth_username !== profile.username && profile.auth_is_followed">Follows You</small>
+      </div>
+      <div class="d-flex w-100">
+        <div class="about mt-1 mb-1 mr-2 ">
+          <span class="text-sm text-muted">
+            {{ profile.about }}
+          </span>
+        </div>
+      </div>
+      <div class="d-flex w-100" *ngIf="twitter_verification_enable && profile.is_verified && profile.twitter_account">
+        <div class="site-link mr-3">
+          <span class="text-nowrap text-sm text-muted"><i class="fa fa-twitter"></i>
+            <a href="https://twitter.com/{{ profile.twitter_account }}" target="_blank" class="mb-0 ml-2">@{{ profile.twitter_account }}</a>
+          </span>
+        </div>
+      </div>
+      <div class="d-flex w-100 mr-2">
+        <div class="location mr-3" *ngIf="profile.location">
+          <span class="text-nowrap text-sm text-muted"><i class="ni ni-pin-3"></i>
+            <span class="text-sm text-muted ml-2">{{ profile.location }}</span></span>
+        </div>
+      </div>
+      <div class="d-flex w-100 mr-2">
+        <div class="site-link mr-3" *ngIf="profile.website">
+          <span class="text-sm text-muted"><i class="fa fa-link"></i>
+            <a href="{{profile.website}}" target="_blank" class="mb-0 ml-2">{{ profile.website }} </a>
+          </span>
+        </div>
+      </div>
+      <div class="d-flex w-100" *ngIf="profile.joined_date">
+        <div class="joined mr-3">
+          <span class="text-nowrap text-sm text-muted"><i class="fa fa-calendar"></i></span>
+          <span class="text-sm text-muted ml-2">Joined {{ profile.joined_date | date:'MMMM yyyy' }}</span>
+        </div>
+      </div>
+      <div class="d-flex w-100">
+        <div class="following mr-3">
+          <p class="mb-0 counter">
+            <span class="text-nowrap font-weight-bold text-sm">{{ profile?.following_count | prettify:'pretty' }}</span>
+            <span class="text-sm ml-2">Following</span>
+          </p>
+        </div>
+        <div class="followers">
+          <p class="mb-0 counter">
+            <span class="text-nowrap font-weight-bold text-sm">{{ profile?.follower_count | prettify:'pretty' }}</span>
+            <span class="text-sm ml-2">Followers</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="tabs mt-lg-0 px-3" *ngIf="!fetching && profile.name">
+      <ngb-tabset [justify]="'fill'" class="tabset">
+        <ngb-tab title="Buzz's">
+          <ng-template ngbTabContent>
+            <app-says [profile]="profile" [fetching]="fetching_says" [feed_list]="feed_list"
+              (fetchNewFeeds)="showMoreFeed($event)" [fetchedall]="fetchedall"></app-says>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Replies">
+          <ng-template ngbTabContent>
+            <app-replies [profile]="profile" [fetching]="fetching_replies" [feed_and_replies]="feed_and_replies"
+              (fetchNewReplies)="showMoreReplies($event)" [fetchedall]="fetchedall_replies">
+            </app-replies>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Followers">
+          <ng-template ngbTabContent>
+            <app-followers [profile]="profile" [data]="follower_list" [fetching]="fetching_followers"
+              (fetchNewFollowers)="showMoreFollowers($event)" [fetchedall]="fetchedall_followers"></app-followers>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Following">
+          <ng-template ngbTabContent>
+            <app-following [profile]="profile" [data]="following_list" [fetching]="fetching_following"
+              (fetchNewFollowing)="showMoreFollowing($event)" [fetchedall]="fetchedall_following"></app-following>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+    <div class="divider"></div>
+    <!-- <span class="border border-top-0"></span> -->
+  </div>
+</main>

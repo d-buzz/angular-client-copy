@@ -1,0 +1,21 @@
+<nav class="navbar bg-white sticky-top card">
+  <div class="card-body bg-transparent">
+    <div class="row align-items-right d-none d-sm-block">
+      <h6 class="text-left font-weight-bold ls-1 mt-3 mb-2">
+        <a (click)="backUrl()"><i class="ni ni-bold-left url"></i></a>
+        <span class="profile-name ls-1 mb-0 ml-2">Trends</span>
+      </h6>
+    </div>
+  </div>
+</nav>
+<!--Fixed Top Navbar for mobile-->
+
+<nav class="navbar fixed-top navbar-light bg-white border-bottom d-block d-sm-none">
+  <div class="text-left ls-2 mt-3 sticky-top">
+    <div class="ml-3">
+      <a (click)="backUrl()" class="mr-2"><i class="ni ni-bold-left url"></i></a>
+      <span class="profile-name ls-1 mb-0 ml-2">Trends</span>
+    </div>
+  </div>
+</nav>
+<app-mobile-menu></app-mobile-menu>

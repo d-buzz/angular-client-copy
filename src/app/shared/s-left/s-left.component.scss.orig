@@ -1,0 +1,150 @@
+.navbar {
+  position: relative;
+  display: flex;
+  padding: 1rem 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar > .container,
+.navbar > .container-fluid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.navbar-nav .nav-link {
+  padding-right: 0;
+  //  padding-left: 10%;
+  font-size: 19px;
+  color: #14171a;
+  font-weight: 700;
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+
+.navbar-brand img {
+  height: 41px !important;
+  margin-bottom: 19px !important;
+}
+
+.navbar-collapse {
+  flex-basis: 100%;
+  flex-grow: 5;
+  align-items: center;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #E61C34;
+  border-color: #E61C34;
+  padding-left: 15px;
+  width: 190px;
+  border-radius: 184px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  text-transform: none;
+}
+.btn-outline-danger{
+  border-radius: 184px;
+  text-decoration: none;
+  text-transform: none;
+
+}
+.sticky-top {
+  position: sticky !important;
+}
+
+.icon-trending, .ni-user-run {
+  width: 30px !important;
+  height: 30px !important;
+
+}
+
+.icon-home{
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.icon-logout{
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.profile-pic {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.prof-pic-selected {
+  width: 30px !important;
+  height: 30px !important;
+  border: 2px solid #E61C34;
+}
+
+.nav-link {
+  font-weight: 700 !important;
+  color: #14171a !important;
+  font-size: 19px !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu, "Helvetica Neue", sans-serif !important;
+
+  &:hover{
+    color: #E61C34;
+  }
+
+  &:hover:not(.active) {
+    background-color: #e8f5fe;
+    border-radius: 26px;
+    -webkit-border-radius: 26px;
+    -moz-border-radius: 26px;
+    padding: 10px 10px;
+ }
+
+ .pointer {
+    cursor: pointer;
+  }
+
+  .nav-selected {
+    color: #E61C34
+  }
+}
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/fe-responsive
+//this is temp fix.
+@media (min-width: 768px) and (max-width: 991px){
+  .icon-autoarrange {
+    position: absolute;
+    top: 180%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    display: block !important;
+    margin: 0;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1399px){
+  .icon-autoarrange-lg {
+    position: absolute;
+    top: 20%;
+    left: -10%;
+    transform: translate(-50%, -50%);
+    display: flex !important;
+    margin: 0;
+  }
+}

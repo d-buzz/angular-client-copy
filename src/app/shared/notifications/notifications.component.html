@@ -1,0 +1,19 @@
+<main>
+  <div class="card shadow mobile-bottom " id="allnotif">
+    <div class="tabs mt-lg-1">
+      <ngb-tabset [justify]="'fill'" class="tabset">
+        <ngb-tab title="All">
+          <ng-template ngbTabContent>
+            <app-all [notifs]="notifs" (fetchNewNotifs)="showMoreNotif($event)" [loading]="fetching"
+              [fetchedall]="fetched_all" (refreshList)="refreshList($event)"></app-all>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Mentions">
+          <ng-template ngbTabContent>
+            <app-mentions></app-mentions>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</main>

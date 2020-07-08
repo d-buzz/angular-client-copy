@@ -1,0 +1,49 @@
+<main>
+  <div class="card">
+    <div class="modal-header">
+      <img src="./assets/img/brand/dbuzz.svg" class="navbar-brand-img" alt="..." height="30px">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+        <span aria-hidden="true"><i class="fa fa-close"></i></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="text-center">
+        <h5 class="font-weight-bold">Login to your account</h5>
+        <span>using Hive Keychain</span><br/>
+        <img src="./assets/img/icons/common/hivekeychain.png" class="keychain" alt="..." height="80px">
+        <div *ngIf="has_hivekeychain">
+          <form role="form" name="loginHiveForm" (ngSubmit)="hivekeychainLogin()" [formGroup]="loginHiveForm" novalidate>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-user"></i></span>
+                </div>
+                <input class="form-control" formControlName="username" placeholder="Username" type="text">
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-lg btn-block login-btn" [disabled]="!loginHiveForm.valid" *ngIf="!logging_in">LOGIN</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block login-btn" *ngIf="logging_in==true"><i class="fa fa-spinner fa-spin"></i></button>
+            </div>
+          </form>
+        </div>
+        <div class="form-group" *ngIf="!has_hivekeychain">
+          <div class="row">
+            <div class="col-md-6">
+              <button type="submit" class="btn btn-primary login-btn" (click)="installForChrome()"><i class="fa fa-chrome icon-larger" style="top: 0px;"></i> Install for Chrome</button>
+            </div>
+            <div class="col-md-6">
+              <button type="submit" class="btn btn-info login-btn" (click)="installForFirefox()"><i class="fa fa-firefox icon-larger" style="top: 0px;"></i> Install for Firefox</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-divider"><span>or</span></div>
+      <div class="text-center mt-2">
+        <button type="button" class="btn btn-outline-primary sign-in-hivesigner" (click)="hivesignerLogin()">HIVESIGNER</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</main>

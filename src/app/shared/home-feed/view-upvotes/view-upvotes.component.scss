@@ -1,0 +1,31 @@
+.btn-round {
+  border-radius: 25px !important;
+  text-decoration: none;
+  text-transform: none;
+  padding: 7px 20px 7px 20px;
+  margin: 5px
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.btn-follow {
+    background-color: #E61C34;
+    border-radius: 25px !important;
+    text-decoration: none;
+    text-transform: none;
+    padding: 7px 15px 7px 15px;
+    margin: 5px;
+    font-size: 14px;
+    &:hover span {
+      display:none
+    }
+    &:hover::after {
+      content: 'Unfollow';
+    }
+  }
+
+  .about {
+    font-size: 14px;
+  }

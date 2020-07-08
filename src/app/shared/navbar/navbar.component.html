@@ -1,0 +1,151 @@
+
+<app-notices ></app-notices>
+
+<nav class="navbar bg-white sticky-top card">
+  <div class="card-body bg-transparent">
+    <div class="row align-items-right d-none d-sm-block">
+      <h6 class="text-uppercase text-center font-weight-bold ls-1 mt-3 mb-0">
+        {{ feed }}
+      </h6>
+    </div>
+  </div>
+</nav>
+
+
+<!--Fixed Top Navbar for mobile-->
+
+<nav class="navbar fixed-top navbar-light bg-white border-bottom d-sm-block d-md-none d-lg-none d-xl-none">
+ 
+  <div class="card-body bg-transparent">
+    <div class="row align-items-right">
+      <!-- 
+    Toggler -->
+      <button class="navbar-toggler d-lg-none d-xl-none hide-bug ml-0 sticky-top" type="button"
+        (click)="isCollapsed = !isCollapsed" aria-controls="sidenav-collapse-main">
+        <span class="profile-pic">
+          <img alt="Image placeholder" src="{{ auth_profilepic }}" onError="this.src='assets/avatars/AVATAR.svg'"
+            width="28" height="28" />
+        </span>
+      </button>
+
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
+        <!-- Collapse header -->
+        <div class="navbar-collapse-header d-md-none">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a routerLinkActive="active" [routerLink]="['/']">
+                <span class="profile-name ls-1 mb-0">Account Info</span>
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="nav flex-column flex-nowrap overflow-hidden">
+          <li class="nav-item">
+            <div class="d-flex w-100">
+              <div class="following mr-3">
+                <span class="avatar rounded-circle" [routerLink]="['/profile']">
+                  <img alt="Image placeholder" src="{{ auth_profilepic }}"
+                    onError="this.src='assets/avatars/AVATAR.svg'" width="50" height="50" />
+                </span>
+              </div>
+              <div class="followers">
+                <div class="profile-details">
+                  <div class="fullname">
+                    <h6 class="font-weight-bold mb-0">{{ profile.author_name | lettercase:'ucfirst-nod' }}
+                      <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && is_verified">
+                        <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg">
+                      </span>
+                    </h6>
+                  </div>
+                  <div class="username mb-0">
+                    <span class="text-sm text-muted">@{{ auth_username }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex w-100">
+              <div class="following mr-3">
+                <p class="mb-0 counter">
+                  <span class="text-nowrap font-weight-bold text-sm">{{
+                    profile?.following_count
+                  }}</span>
+                  <span class="text-sm ml-2"><a>Following</a></span>
+                </p>
+              </div>
+              <div class="followers">
+                <p class="mb-0 counter">
+                  <span class="text-nowrap font-weight-bold text-sm">{{
+                    profile?.follower_count
+                  }}</span>
+                  <span class="text-sm ml-2"><a>Followers</a></span>
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="profile-link">
+              <a (click)="gotoProfile()" class="nav-link px-0"><img class="icons rounded-circle"
+                  alt="Image placeholder" src="./assets/img/icons/common/PROFILE.svg" />
+                <span class="text-sm ml-2">Profile</span></a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="profile-link">
+              <a (click)="gotoLatest()" class="nav-link px-0"><img class="icons rounded-circle"
+                  alt="Image placeholder"  src="./assets/img/icons/svg/CLOCK-BLACK.svg" />
+                <span class="text-sm ml-2">Latest</span></a>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <div class="profile-link">
+              <a (click)="gotoTrending()" class="nav-link px-0"><img class="icons rounded-circle"
+                  alt="Image placeholder" src="./assets/img/icons/common/TRENDING.svg" />
+                <span class="text-sm ml-2">Trending</span></a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="profile-link">
+              <a class="nav-link px-0" (click)="logout()"><i class="ni ni-user-run"></i>
+                <span class="text-sm ml-2">Logout</span></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- toggler -->
+      <p class="ls-2 mt-1 mb-0 mr-3 home-sms sticky-top">
+        {{ feed  | lettercase:'ucfirst-nod' }}
+      </p>
+      <!-- <div class="d-flex">
+        <div class="mr-auto mt-1">
+          <p class="ls-2 mt-1 mb-0 mr-3 home-sms sticky-top">{{ is_trending_feed ? 'Trending' : 'Home'}}</p>
+        </div>
+        <div class="mt-1 ls-1 ml-5 mb-0" *ngIf="!is_verified">
+          <span class="text-info" (click)="verifyAccount()">Verify</span>
+        </div>
+        <div class="mt-1 ls-1 ml-4 mb-0">
+          <span *ngIf="!subscribing && !is_subscribed" class="text-danger" (click)="subscribeCommunity()">Subscribe</span>
+          <span *ngIf="!subscribing && is_subscribed" class="text-danger" (click)="unsubscribeCommunity()">Unsubscribe</span>
+          <span *ngIf="subscribing"><i class="fa fa-spinner fa-spin"></i></span>
+        </div>
+      </div> -->
+    </div>
+    <!-- <span class="blog_promoted text-right"><i class="fa fa-angle-down"></i></span> -->
+  </div>
+  <div class="text-right mb-0 settings mr-2">
+    <a class="nav-link" (click)="gotoSearch()">
+      <img class="nav-icon" alt="Search Icon" src="./assets/img/icons/svg/SEARCH-BLACK.svg">
+    </a>
+  </div>
+</nav>
+<app-mobile-menu [auth_username]="auth_username" (refreshList)="refreshFeed()"></app-mobile-menu>

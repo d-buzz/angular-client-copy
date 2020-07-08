@@ -1,0 +1,38 @@
+<nav class="navbar bg-white sticky-top card">
+  <div class="ls-2 mt-3 mb-0 d-none d-sm-block">
+    <div class="ml-3">
+      <a (click)="backUrl()" class="mr-2"><i class="ni ni-bold-left url"></i></a>
+      <span class="profile-name ls-1 mb-0">Notifications</span>
+    </div>
+  </div>
+  <div class="text-right mb-0 settings mr-3">
+    <div ngbDropdown ngbDropdown placement="center-right" class="d-inline-block">
+      <i class="fa fa-ellipsis-v fa-lg" id="dropdownBasic1" ngbDropdownToggle></i>
+      <div ngbDropdownMenu aria-labelledby="notif-options">
+        <button ngbDropdownItem (click)="markAllAsRead()"> Mark All as Read</button>
+        <button ngbDropdownItem (click)="clearAll()">Clear All</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!--Fixed Top Navbar for mobile-->
+
+<nav class="navbar fixed-top navbar-light bg-white border-bottom d-block d-sm-none">
+  <div class="text-left ls-2 mt-3 sticky-top">
+    <div class="ml-3">
+      <a (click)="backUrl()" class="mr-2"><i class="ni ni-bold-left url"></i></a>
+      <span class="profile-name ls-1 mb-0">Notifications</span>
+    </div>
+    <div class="text-right mb-0 settings mr-3">
+      <div ngbDropdown ngbDropdown placement="center-right" class="d-inline-block">
+        <i class="fa fa-ellipsis-v fa-lg" id="dropdownBasic1" ngbDropdownToggle></i>
+        <div ngbDropdownMenu aria-labelledby="notif-options">
+          <button ngbDropdownItem (click)="markAllAsRead()"> Mark All as Read</button>
+          <button ngbDropdownItem (click)="clearAll()">Clear All</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<app-mobile-menu></app-mobile-menu>

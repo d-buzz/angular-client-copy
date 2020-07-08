@@ -1,0 +1,53 @@
+<div class="media align-items-center">
+  <div class="media-body ml-2">
+      <div class="d-flex w-100 justify-content-between">
+        <div class="profile-pic">
+          <span class="avatar rounded-circle">
+            <img alt="Image placeholder" src="{{ data.author_accounts?.author_profile_pic }}" onError="this.src='assets/avatars/AVATAR.svg'" width="50" height="50"/>
+          </span>
+        </div>
+        <button *ngIf="(auth_username!==author) && is_following" class="btn btn-primary btn-round disabled" type="button">Following</button>
+        <button *ngIf="(auth_username!==author) && !is_following" class="btn btn-outline-danger btn-round disabled" type="button" (click)="followAuthor()">Follow</button>
+      </div>
+      <span class="h6 font-weight-bold mb-0 mt--3">{{ data.author_accounts?.author_name | lettercase:'ucfirst' }}</span>
+        <!--Added Verified Badge-->
+        <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && data.author_accounts.is_verified === 1">
+          <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg"> 
+      </span>
+
+      <!--End of Verified Badge-->
+      <br>
+      <span class="mb-0" href="#"> @{{ author }}</span>
+      <p class="mb-0 text-muted number-tweets">
+        <span>{{ data.author_accounts?.author_profile.profile.about | lettercase:'utf8' }}</span>
+      </p>
+      <div class="d-flex w-100 justify-content-between">
+        <div class="following">
+          <p class="mb-0 text-muted number-tweets">
+            <span class="text-nowrap">{{ data.author_accounts?.following_count }} Following</span>
+          </p>
+        </div>
+        <div class="followers">
+          <p class="mb-0 text-muted number-tweets">
+            <span class="text-nowrap">{{ data.author_accounts?.follower_count }} Followers</span>
+          </p>
+        </div>
+      </div>
+      <div class="d-flex w-100 justify-content-between" *ngIf="followers_info">
+        <div class="avatar-group">
+          <a href="javascript:void(0)" class="avatar avatar-sm" *ngFor="let follow of followers_info">
+            <img alt="Image placeholder" src="{{ follow.author_profile_pic }}" onError="this.src='assets/avatars/AVATAR.svg'"
+              class="rounded-circle" width="30" height="30"/>
+          </a>
+
+          <span class="mb-0 text-sm" placement="center">
+            Followed by: 
+            <span *ngFor="let follow of followers_info;let i =index;">
+              {{ follow.username | lettercase:'ucfirst' }}<span *ngIf="i < 2">,</span> <span *ngIf="i == 2"> and </span>
+            </span>
+          </span>
+        </div>
+      </div>
+  </div>
+  
+</div>

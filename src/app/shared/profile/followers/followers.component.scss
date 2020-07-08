@@ -1,0 +1,44 @@
+
+.btn{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.btn-round, .btn-outline-primary {
+    border-radius: 25px !important;
+    text-decoration: none;
+    text-transform: none;
+    padding: 7px 20px 7px 20px;
+    margin: 5px
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.url {
+    color: #14171a;
+    cursor: pointer;
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }   
+}
+
+
+.btn-following {
+    background-color: #E61C34;
+    border-radius: 25px !important;
+    text-decoration: none;
+    text-transform: none;
+    padding: 7px 20px 7px 20px;
+    margin: 5px;
+    &:hover span {
+      display:none
+    }
+    &:hover::after {
+      content: 'Unfollow';
+    }
+  }
+  

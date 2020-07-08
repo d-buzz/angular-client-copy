@@ -1,0 +1,17 @@
+export const ENV = {
+    APP_HOST: 'http://localhost:4200',
+    STEEMSAYS_API_HOST: 'http://localhost:3000',
+    CHAR_LIMIT: 280,
+    PRIMARY_TAG: 'hive-153112',
+    STEEMIT_IMAGES_URL: 'https://steemitimages.com/400x400/',
+    TREND_TAGS_LIMIT: 5,
+    TO_FOLLOW_LIMIT: 3,
+    POPOVER_FOLLOWER_LIMIT: 4,
+    STEEM_DEMO_ENABLE: true,
+    STEEM_DEMO_PASS: 'DemoSteemsaysProject!@#',
+    SOCKET_URL: 'http://localhost:2088',
+    HIVE_KEYCHAIN_ENABLE: false,
+    TWITTER_VERIFICATON_ENABLE: false,
+    IMAGE_UPLOAD_LIMIT: 4,
+    SHOW_NOTICE: false,
+}

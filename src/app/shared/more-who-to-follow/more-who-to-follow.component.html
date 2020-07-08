@@ -1,0 +1,42 @@
+<div class="list-group rounded-circle mobile-bottom">
+  <div style="text-align: center;">
+    <span *ngIf="fetching">Loading to follow list <i class="fa fa-spinner fa-spin"></i></span>
+    <span *ngIf="!fetching && follow_list.length==0">No suggestions found</span>
+  </div>
+  <div class="section-blog-list profile-item" *ngFor="let follow of follow_list;let i=index;">
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="media align-items-center">
+        <span class="avatar avatar-sm rounded-circle">
+          <a [routerLink]="['/profile/','@'+follow.author]">
+            <img alt="Image placeholder" src="{{ follow.author_profile_pic }}"
+              onError="this.src='assets/avatars/AVATAR.svg'" width="40" height="40" /></a>
+        </span>
+        <div class="media-body mt-1 ml-2">
+          <span class="mb-0">
+            <span class="username mb-0 url">
+              <a [routerLink]="['/profile/','@'+follow.author]">
+                <b> {{ follow.author_name | lettercase:'ucfirst' }}</b>
+              </a>
+            </span>
+            <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && follow.is_verified==1">
+              <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg">
+            </span>
+          </span>
+          <br />
+          <span class="username" href="#"> @{{ follow.author }}</span>
+          &nbsp;<small *ngIf="follow.is_followed" class="badge badge-default">Follows You</small>
+          <br />
+          <span class="about">{{ follow.author_profile.profile.about  | lettercase:'utf8'}}</span>
+        </div>
+        <span class=" text-right mr-2">
+          <button class="btn btn-outline-danger btn-round" type="button" (click)="followAuthor(follow,i)"
+            *ngIf="!follow.is_following  && !follow.followed">Follow</button>
+            <button class="btn btn-primary btn-following" *ngIf="!follow.is_following && follow.followed" type="button">
+              <span>Following</span></button>
+          <button class="btn btn-outline-danger btn-round" type="button" *ngIf="follow.is_following"><i
+              class="fa fa-spinner fa-spin"></i></button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

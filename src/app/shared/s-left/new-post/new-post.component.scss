@@ -1,0 +1,39 @@
+textarea.form-control {
+  overflow:hidden;
+  display:inline-block;
+  word-break: break-word;
+  white-space:pre-wrap;
+  padding-top: -28px;
+  padding-bottom: -39px;
+  resize: none;
+  font-size: 18px;
+  height:5em;
+  border-style: none;
+  font-weight: 500;
+  min-height: 5em;
+}
+
+input.form-control {
+  font-size: 16px;
+  // border-style: none;
+}
+
+.btn-primary {
+  background-color: #E61C34;
+  border-radius: 25px !important;
+  text-decoration: none;
+  text-transform: none;
+  cursor: pointer;
+}
+
+// .close {
+
+//   &:hover {
+//     background-color: #e8f5fe;
+//     border-radius: 26px;
+//     -webkit-border-radius: 26px;
+//     -moz-border-radius: 26px;
+//     padding: 10px 10px;
+//     text-decoration: none;
+//   }
+// }

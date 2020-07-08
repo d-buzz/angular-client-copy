@@ -1,0 +1,221 @@
+<div *ngFor="let feed of feed_and_replies;let i =index;">
+  <div class="wsubreply mt-3">
+    <div class="item-nosub">
+      <div class="section-blog-list profile-item pointer">
+        <div class="media align-items-center">
+          <div class="item-avatar-nosub">
+            <span class="avatar avatar-sm rounded-circle">
+            <a class="url" (click)="gotoProfile(feed.author)">
+                <img alt="Image placeholder" src="{{ feed.author_accounts?.author_profile_pic }}"
+                  onError="this.src='assets/avatars/AVATAR.svg'" width="40" height="40" /></a>
+            </span>
+          </div>
+          <div class="media-body">
+            <span class="mb-0 avatar-name url" [ngbPopover]="popContent1" triggers="mouseenter:mouseleave"
+              placement="right"  [openDelay]="500" [closeDelay]="12000" *ngIf="this.auth_username!==feed.author"><a
+                (click)="gotoProfile(feed.author)"><b>{{feed.author_accounts?.author_name | lettercase:'ucfirst' }}</b></a></span>
+            <span class="mb-0 avatar-name url" *ngIf="this.auth_username==feed.author"><a
+                (click)="gotoProfile(feed.author)"><b>{{feed.author_accounts?.author_name | lettercase:'ucfirst' }}</b></a></span>
+            
+            <span class="mb-0 ml-1 verified-badge" *ngIf="twitter_verification_enable && feed.author_accounts?.is_verified==1">
+                <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg"> 
+            </span>
+
+            <span class="username" href="#"> @{{ feed.author }}</span>
+            <span class="text-center"> . </span>
+            <span class="timestamp_hours" data-toggle="tooltip" data-placement="top" title="{{ feed.created_dt }}"><small
+                class="timeago"> {{ feed.created | timeago:live }}</small></span>
+            <ng-template class="content-popover" #popContent1>
+              <app-popover-detail [data]="feed"></app-popover-detail>
+            </ng-template>
+          </div>
+          <!-- <span class="blog_promoted text-right"><i class="fa fa-angle-down"></i></span> -->
+        </div>
+      </div>
+      <div class="section-blog-list content-holder">
+        <div class="replying">
+          <small class="replying text-sm mr-2">Replying to</small>
+          <small class="replying text-sm text-primary"><a>@{{ feed.parent_author }}</a></small>
+        </div>
+        <div class="media align-items-center pointer">
+          <div class="media-body mt-2">
+            <p class="mb-2 content" [innerHTML]="feed.body | lettercase:'utf8' | stripHTML | markdown" (click)="viewPost(feed)"></p>
+            <div *ngIf="feed.preview_link && feed.link_metadata" class="preview mb-2">
+              <a *ngIf="feed.link_metadata" class="link-prev" href="{{ feed.link_metadata?.url }}" target="_blank">
+                <div class="media align-items-center position-relative">
+                  <img class="ml-2 mr-2 text-wrap rounded no-preview" *ngIf="!feed.link_metadata?.image" src="assets/img/icons/svg/NO-PREVIEW.svg">
+                  <img class="mr-2 text-wrap rounded logo-preview" *ngIf="feed.link_metadata?.image" src="{{ feed.link_metadata?.image }}" onError="this.src='assets/img/icons/svg/NO-PREVIEW.svg';this.className='ml-2 mr-2 text-wrap rounded no-preview'">                 
+                  <div class="media-body text-wrap mb-0 mr-1" *ngIf="feed.link_metadata?.url">
+                    <p class="title mb-0" *ngIf="feed.link_metadata?.title">{{ feed.link_metadata?.title }}</p>
+                    <p class="description mb-0" *ngIf="feed.link_metadata?.description">{{ feed.link_metadata?.description.substr(0,100) + '.....' }}</p>
+                    <a href="{{ feed.link_metadata?.url }}" target="_blank" class="text-mute text-sm link"> <i class="fa fa-link"></i>
+                     <span class="text-wrap mr-2"> {{ feed.link_metadata?.url.substr(0,30) + '...' }}</span>
+                    </a>                   
+                  </div>
+                </div> 
+              </a>
+            </div>
+              <span *ngFor="let tag of feed.tags">
+                <a href="#">#{{ tag.replace(' ','') }}</a>&nbsp;
+              </span>
+          </div>
+        </div>
+        <div class="media align-items-center">
+          <div class="container-fluid">
+            <div class="row justify-content-md-left icons-row">
+              <div class="col">
+                <div class="inline-elements">
+                  <a (click)="showSliderPost(feed,i)" class="heart pointer">
+                    <i *ngIf="!feed.voting && feed.user_is_voter" class="fa fa-heart  mr-2 ml-2 response"></i>
+                    <i *ngIf="!feed.voting && !feed.user_is_voter" class="fa fa-heart  mr-2 ml-2"></i>
+                    <i *ngIf="feed.voting" class="fa fa-circle-o-notch fa-spin response"></i>
+                    
+                  </a>
+
+                  <span class="responses" *ngIf="feed.post_has_rewards">{{ feed.voter_counter == 0 ? '' : (feed.voter_counter | prettify:'pretty1') }}</span>
+                     
+          
+                  <!--Decline Added-->
+                  <del *ngIf="!feed.post_has_rewards"><span class="responses">{{ feed.voter_counter == 0 ? '' : (feed.voter_counter | prettify:'pretty1') }}</span></del>
+                    
+                  
+                </div>
+                <div class="cslider" *ngIf="showSlider == i">
+                  <span class="pointer" (click)="upvote(feed)"><i class="fa fa-chevron-up"></i></span>
+                  <span>{{ sliderControl.value }}%</span>
+                  <ng5-slider [options]="options" [formControl]="sliderControl"></ng5-slider>
+                  <span (click)="showSliderPost(feed, 'hide')"><i class="fa fa-times" aria-hidden="true"></i></span>
+                </div>
+    
+              </div>
+              <div class="col">
+                <a (click)="comment(feed,i)" class="comment pointer">
+                  <img class="icon-reply" alt="Reply Icon" src="./assets/img/icons/svg/REPLY-GRAY.svg">
+                  <span class="responses" id="replies_count_{{i}}">
+                    {{ feed.replies_count == 0 ? '' : (feed.replies_count | prettify:'pretty1') }}</span>
+                </a>
+              </div>
+              <!-- <div class="col">
+                <a (click)="resteem()" class="retweet pointer">
+                  <img *ngIf="!feed.reblogging && feed.is_reblogged" src="./assets/img/icons/svg/REPOST-BLUE.svg">
+                  <img *ngIf="!feed.reblogging && !feed.is_reblogged" src="./assets/img/icons/svg/REPOST-GRAY.svg">
+                  <span class="responses">
+                    {{ feed.reblog_count == 0 ? '' : (feed.reblog_count | prettify:'pretty1') }}</span>
+                </a>
+              </div> -->
+              
+              <div class="col">
+                <a (click)="flagPost(feed)" class="share pointer">
+                  <img *ngIf="!feed.flagging && feed.flagged" class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/flagdown.svg">
+                  <img *ngIf="!feed.flagging && !feed.flagged" class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/flagneutral.svg">
+                  <i *ngIf="feed.flagging" class="fa fa-circle-o-notch fa-spin response"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <div *ngFor="let reply of feed.replies; let ii =index;">
+    <div class="{{ ii+1 == feed.replies.length ? 'item-nosub' : 'item' }}">
+      <div class="section-blog-list profile-item pointer">
+        <div class="media align-items-center">
+          <div class="{{ ii+1 == feed.replies.length ? 'item-avatar-nosub' : 'item-avatar' }}">
+            <span class="avatar avatar-sm rounded-circle">
+              <a class="url" (click)="gotoProfile(reply.author)">
+                <img alt="Image placeholder" src="{{ reply.author_accounts?.author_profile_pic }}"
+                  onError="this.src='assets/avatars/AVATAR.svg'" width="40" height="40" /></a>
+            </span>
+          </div>
+          <div class="media-body">
+            <span class="mb-0 avatar-name url" [ngbPopover]="popContent2" triggers="mouseenter:mouseleave"
+              placement="right"  [openDelay]="500" [closeDelay]="12000" *ngIf="this.auth_username!==reply.author"><a
+                (click)="gotoProfile(reply.author)"><b>{{reply.author_accounts?.author_name | lettercase:'ucfirst' }}</b></a></span>
+            <span class="mb-0 avatar-name url" *ngIf="this.auth_username==reply.author"><a
+                (click)="gotoProfile(reply.author)"><b>{{reply.author_accounts?.author_name | lettercase:'ucfirst' }}</b></a></span>
+            <span class="mb-0 ml-1 verified-badge" *ngIf="reply.author_accounts?.is_verified==1">
+                <img class="icon-forward" alt="Reply Icon" src="./assets/img/icons/common/verified.svg"> 
+            </span>
+
+            <span class="username" href="#"> @{{ reply?.author }}</span>
+            <span class="text-center"> . </span>
+            <span class="timestamp_hours" data-toggle="tooltip" data-placement="top" title="{{ reply?.created }}"><small
+                class="timeago"> {{ reply?.created | timeago:live }}</small></span>
+            <ng-template class="content-popover" #popContent2>
+              <app-popover-detail [data]="reply"></app-popover-detail>
+            </ng-template>
+          </div>
+          <!-- <span class="blog_promoted text-right"><i class="fa fa-angle-down"></i></span> -->
+        </div>
+      </div>
+      <div class="section-blog-list content-holder">
+        <div class="replying">
+          <small class="replying text-sm mr-2">Replying to</small>
+          <small class="replying text-sm text-primary"><a>@{{ reply.parent_author }}</a></small>
+        </div>
+        <div class="media align-items-center pointer" (click)="viewPost(reply)">
+          <div class="media-body mt-2">
+            <p class="mb-2 content" [innerHTML]="reply.body | stripHTML"></p>
+             <span *ngFor="let tag of reply.tags"> <a href="#"> #{{ tag }}</a></span>
+          </div>
+        </div>
+        <div class="media align-items-center">
+          <div class="container-fluid">
+            <div class="row justify-content-md-left icons-row">
+              <div class="col">
+                <div class="inline-elements">
+                  <a (click)="showSliderPost(reply, i)" class="heart pointer">
+                    <i *ngIf="!reply.voting && reply.user_is_voter" class="fa fa-heart  mr-2 ml-2 response"></i>
+                    <i *ngIf="!reply.voting && !reply.user_is_voter" class="fa fa-heart  mr-2 ml-2"></i>
+                    <i *ngIf="reply.voting" class="fa fa-circle-o-notch fa-spin response"></i>                    
+                  </a>
+
+                  <span  class="responses" *ngIf="reply.post_has_rewards">{{ reply.voter_counter == 0 ? '' : (reply.voter_counter | prettify:'pretty1') }}</span>
+                  <!--Decline Added-->
+                  <del *ngIf="!reply.post_has_rewards"><span  class="responses">{{ reply.voter_counter == 0 ? '' : (reply.voter_counter | prettify:'pretty1') }}</span></del>
+
+                </div>
+                <div class="cslider" *ngIf="showSlider == reply.post_id">
+                  <span class="pointer" (click)="upvote(reply)"><i class="fa fa-chevron-up"></i></span>
+                  <span>{{ sliderControl.value }}%</span>
+                  <ng5-slider [options]="options" [formControl]="sliderControl"></ng5-slider>
+                  <span (click)="showSliderPost(reply, 'hide')"><i class="fa fa-times" aria-hidden="true"></i></span>
+                </div>
+    
+              </div>
+              <div class="col">
+                <a (click)="comment(reply,i)" class="comment pointer">
+                  <img class="icon-reply" alt="Reply Icon" src="./assets/img/icons/svg/REPLY-GRAY.svg">
+                  <span class="responses" id="replies_count_{{i}}">
+                    {{ reply?.replies_count == 0 ? '' : (reply?.replies_count | prettify:'pretty1') }}</span>
+                </a>
+              </div>
+              <!-- <div class="col">
+                <a (click)="resteem()" class="retweet pointer">
+                  <img *ngIf="!reply.reblogging && reply.is_reblogged" src="./assets/img/icons/svg/REPOST-BLUE.svg">
+                  <img *ngIf="!reply.reblogging && !reply.is_reblogged" src="./assets/img/icons/svg/REPOST-GRAY.svg">
+                  <span class="responses">
+                    {{ reply?.reblog_count == 0 ? '' : (reply?.reblog_count | prettify:'pretty1') }}</span>
+                </a>
+              </div> -->
+             
+              <div class="col">
+                <a (click)="flagPost(reply,1)" class="share pointer">
+                  <img *ngIf="!reply.flagging && reply.flagged" class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/flagdown.svg">
+                  <img *ngIf="!reply.flagging && !reply.flagged" class="icon-forward" alt="Reply Icon" src="./assets/img/icons/svg/flagneutral.svg">
+                  <i *ngIf="reply.flagging" class="fa fa-circle-o-notch fa-spin response"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+  <hr class="mt-2 mb-0">
+</div>
+<div style="text-align: center;" class="mt-3 mb-2">
+  <span *ngIf="fetching && !fetchedall">Loading...<i class="fa fa-refresh fa-spin"></i></span>
+  <span *ngIf="!fetching && feed_and_replies.length == 0">No Buzz's/replies found</span>
+</div>
